@@ -26,7 +26,11 @@ public class StudentController {
         return studentService.getStudentsDTO();
     }
     @GetMapping("/getStudent")
-    public Student getStudents(@RequestParam("id_student") Long id){
+    public Student getStudent(@RequestParam("id_student") Long id){
         return studentService.getStudent(id);
+    }
+    @GetMapping("/getStudentDTO")
+    public StudentDTO getStudentDTO(@RequestParam("id_student") Long id){
+        return studentService.getStudentDTO(id);
     }
 }

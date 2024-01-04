@@ -33,4 +33,11 @@ public class StudentService {
     public Student getStudent(Long id) {
         return studentRepo.findById(id).get();
     }
+    public StudentDTO getStudentDTO(Long id) {
+        StudentDTO studentDTO = new StudentDTO();
+        Student student= studentRepo.findById(id).get();
+        studentDTO.setId(student.getId());
+        studentDTO.setName(student.getName());
+        return studentDTO;
+    }
 }
