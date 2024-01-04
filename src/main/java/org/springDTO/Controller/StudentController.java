@@ -1,9 +1,9 @@
 package org.springDTO.Controller;
 
 import org.springDTO.Models.Student;
+import org.springDTO.Models.StudentDTO;
 import org.springDTO.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +19,9 @@ public class StudentController {
     @GetMapping("/allStudents")
     public List<Student> getAllStudents(){
         return studentService.getStudents();
+    }
+    @GetMapping("/allStudentsDTO")
+    public List<StudentDTO> getAllStudentsDTO(){
+        return studentService.getStudentsDTO();
     }
 }
