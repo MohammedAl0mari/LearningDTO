@@ -47,7 +47,9 @@ public class StudentService {
 
     public StudentDTO getStudentDTO(Long id) {//with modelMapper
         Student student= studentRepo.findById(id).get();
-        StudentDTO studentDTO = modelMapper.map(student,StudentDTO.class);
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setPhone("0792928753");
+        modelMapper.map(student,studentDTO);
         return studentDTO;
     }
 }
