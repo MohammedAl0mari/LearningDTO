@@ -56,15 +56,16 @@ public class StudentService {
 
     public StudentCoursesDTO studentCourse(List<Long> ids) {
         Student student = courseRepo.findStudentByCourseID(ids.get(0));
-        StudentCoursesDTO studentCoursesDTO = new StudentCoursesDTO();
-        studentCoursesDTO.setId(student.getId());
-        studentCoursesDTO.setName(student.getName());
+        StudentCoursesDTO studentCoursesDTO = modelMapper.map(student,StudentCoursesDTO.class);
+
+        /*studentCoursesDTO.setId(student.getId());
+        studentCoursesDTO.setName(student.getName());*/
 
         List<Course> courses = courseRepo.listCoursesInIds(ids);
         for (Course c :courses){
-            CourseResponse courseResponse = new CourseResponse();
-            courseResponse.setId(c.getId());
-            courseResponse.setCost(c.getCost());
+            CourseResponse courseResponse = modelMapper.map(c,CourseResponse.class);
+            /*courseResponse.setId(c.getId());
+            courseResponse.setCost(c.getCost());*/
             studentCoursesDTO.getCourseList().add(courseResponse);
 
         }
