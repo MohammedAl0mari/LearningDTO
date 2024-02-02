@@ -3,10 +3,7 @@ package org.springDTO.Service;
 import org.modelmapper.ModelMapper;
 import org.springDTO.DAO.CourseRepo;
 import org.springDTO.DAO.StudentRepo;
-import org.springDTO.Models.Student;
-import org.springDTO.Models.StudentCoursesDTO;
-import org.springDTO.Models.StudentDTO;
-import org.springDTO.Models.StudentResponse;
+import org.springDTO.Models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +59,15 @@ public class StudentService {
         StudentCoursesDTO studentCoursesDTO = new StudentCoursesDTO();
         studentCoursesDTO.setId(student.getId());
         studentCoursesDTO.setName(student.getName());
+
+        List<Course> courses = courseRepo.listCoursesInIds(ids);
+        for (Course c :courses){
+            CourseResponse courseResponse = new CourseResponse();
+            courseResponse.setId(c.getId());
+            courseResponse.setCost(c.getCost());
+            studentCoursesDTO.getCourseList().add(courseResponse);
+
+        }
         return studentCoursesDTO;
     }
 }
