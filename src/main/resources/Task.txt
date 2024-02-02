@@ -1,0 +1,14 @@
+api ------> List<Long> courses_ids
+-------------------------------------------
+Response::
+{	student
+	id:
+	name:
+	courses:
+		[	course
+			{id:
+			cost:},
+			{id:
+			cost:}
+		]
+}
