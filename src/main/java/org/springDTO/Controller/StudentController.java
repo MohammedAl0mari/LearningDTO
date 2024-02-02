@@ -1,6 +1,7 @@
 package org.springDTO.Controller;
 
 import org.springDTO.Models.Student;
+import org.springDTO.Models.StudentCoursesDTO;
 import org.springDTO.Models.StudentDTO;
 import org.springDTO.Models.StudentResponse;
 import org.springDTO.Service.StudentService;
@@ -33,5 +34,10 @@ public class StudentController {
     @GetMapping("/getStudentDTO")
     public StudentResponse getStudentDTO(@RequestParam("id_student") Long id){
         return studentService.getStudentDTO(id);
+    }
+
+    @GetMapping("/student-course")
+    public StudentCoursesDTO studentCourse(@RequestParam("courses_id_list") List<Long> ids){
+        return studentService.studentCourse(ids);
     }
 }

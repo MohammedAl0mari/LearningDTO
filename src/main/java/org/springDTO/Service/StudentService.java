@@ -1,8 +1,10 @@
 package org.springDTO.Service;
 
 import org.modelmapper.ModelMapper;
+import org.springDTO.DAO.CourseRepo;
 import org.springDTO.DAO.StudentRepo;
 import org.springDTO.Models.Student;
+import org.springDTO.Models.StudentCoursesDTO;
 import org.springDTO.Models.StudentDTO;
 import org.springDTO.Models.StudentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class StudentService {
 
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private CourseRepo courseRepo;
 
     public List<Student> getStudents(){//getting Students no DTO
         return studentRepo.findAll();
@@ -51,5 +55,13 @@ public class StudentService {
         //studentResponse = modelMapper.map(student,StudentResponse.class);
         modelMapper.map(student,studentResponse);
         return studentResponse;
+    }
+
+    public StudentCoursesDTO studentCourse(List<Long> ids) {
+        Student student = courseRepo.findStudentByCourseID(ids.get(0));
+        StudentCoursesDTO studentCoursesDTO = new StudentCoursesDTO();
+        studentCoursesDTO.setId(student.getId());
+        studentCoursesDTO.setName(student.getName());
+        return studentCoursesDTO;
     }
 }
