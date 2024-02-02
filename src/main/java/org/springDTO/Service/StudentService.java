@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springDTO.DAO.StudentRepo;
 import org.springDTO.Models.Student;
 import org.springDTO.Models.StudentDTO;
+import org.springDTO.Models.StudentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class StudentService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public List<Student> getStudents(){
+    public List<Student> getStudents(){//getting Students no DTO
         return studentRepo.findAll();
     }
     public List<StudentDTO> getStudentsDTO(){
@@ -26,9 +27,7 @@ public class StudentService {
         List<Student> students= studentRepo.findAll();
         List<StudentDTO> studentDTOS = new ArrayList<>();
         for(Student student:students){
-            StudentDTO studentDTO =new StudentDTO();
-            studentDTO.setId(student.getId());
-            studentDTO.setName(student.getName());
+            StudentDTO studentDTO = modelMapper.map(student,StudentDTO.class);
             studentDTOS.add(studentDTO);
         }
         return studentDTOS;
@@ -45,11 +44,12 @@ public class StudentService {
         return studentDTO;
     }*/
 
-    public StudentDTO getStudentDTO(Long id) {//with modelMapper
-        Student student= studentRepo.findById(id).get();
-        StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setPhone("0792928753");
-        modelMapper.map(student,studentDTO);
-        return studentDTO;
+    public StudentResponse getStudentDTO(Long id){
+        Student student = studentRepo.findById(id).get();
+        StudentResponse studentResponse = new StudentResponse();
+        studentResponse.setPhone("01113903660");
+        //studentResponse = modelMapper.map(student,StudentResponse.class);
+        modelMapper.map(student,studentResponse);
+        return studentResponse;
     }
 }

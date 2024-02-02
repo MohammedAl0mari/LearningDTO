@@ -3,9 +3,10 @@ package org.springDTO.Models;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class StudentDTO {
+@Getter
+public class CourseDTO {
     private Long id;
     private String name;
+    private String cost;
 }
